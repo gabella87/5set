@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Prueba</title>
+	<base href="/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script language="php" src="insert.php"></script>
+</head>
+
+<body>
+	<app-root></app-root>
+	<div ng-app="myapp" ng-controller="empcontroller">
+	<form>
+		ID <input type="text" ng-model="empid"/><br/>
+		First Name <input type="text" ng-model="empname"/><br/>
+		First Name <input type="text" ng-model="emplname"/><br/>
+		E-mail <input type="text" ng-model="empmail"/><br/>
+		<input type="button" value="submit" ng-click="insertdata()"/><br/>
+	</form>
+
+	<script>
+		var app = angular.module('myapp',[]);
+
+		app.controller('empcontroller',function($scope,$http){
+			$scope.insertdata=function(){
+				$http.post("insert.php",{'empid':$scope.empid, 'empname':$scope.empname, 'emplname':$scope.emplname, 'empmail':$scope.empmail})
+				.success(function(data,status,headers,config){
+					console.log("data inserted successfully");
+				});
+			}
+		});
+	</script>
+	</div>
+<script type="text/javascript" src="runtime.js"></script><script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="styles.js"></script><script type="text/javascript" src="vendor.js"></script><script type="text/javascript" src="main.js"></script></body>
+</html>
